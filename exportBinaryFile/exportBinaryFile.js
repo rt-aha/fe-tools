@@ -10,11 +10,10 @@ function exportBinaryFile() {
   const ajaxInfo = {
     apiUrl: 'https://', // ###
     payload: {}, // ###
-  };
-
-  const config = {
-    headers: { Authorization: 'auth' }, // ### 是否有權限
-    responseType: 'blob', // 請求格式
+    config: {
+      headers: { Authorization: 'auth' }, // ### 是否有權限
+      responseType: 'blob', // 請求格式
+    },
   };
 
   const fileInfo = {
@@ -23,7 +22,8 @@ function exportBinaryFile() {
   };
 
   // ### get ? post ?
-  const res = axios.post(ajaxInfo.apiUrl, ajaxInfo.payload, config);
+  const res = axios.get(ajaxInfo.apiUrl, ajaxInfo.config);
+  const res = axios.post(ajaxInfo.apiUrl, ajaxInfo.payload, ajaxInfo.config);
   const binaryData = [res.data]; // 陣列中是二進位資料
 
   const url = window.URL.createObjectURL(new Blob(binaryData, { type }));
